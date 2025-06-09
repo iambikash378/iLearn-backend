@@ -2,6 +2,9 @@ import express from 'express';
 import cors from 'cors';
 import mongoose from 'mongoose';
 
+import userRoutes from './routes/userRoutes.js';
+import leaderboardRoutes from './routes/leaderboardRoutes.js';
+
 const PORT = 8000;
 const MONGO_URI = 'mongodb://localhost:27017/random';
 
@@ -20,85 +23,8 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-
-const Schema = mongoose.Schema;
-
-const newSchema = new Schema(
-    {
-        name: String,
-        score: Number,
-    }
-);
-
-const userSchema = new Schema(
-    {
-        name: String,
-        email: String,
-        password: String,
-        gender : String,
-        dob : Date
-    }
-);
-
-const leaderboardModel = mongoose.model('leaderboard', newSchema);
-const userModel = mongoose.model('userinfo', userSchema);
-
-app.post('/leaderboard/add', async (req, res) =>{
-    const {name, score} = req.body;
-    console.log("Received name : %s | Received score : %d", name, score);
-    try{
-        const entry = new leaderboardModel({name, score});
-        await entry.save();
-        res.status(201).json({message:'Entry saved successfully !'});
-    }
-    catch (error){
-        console.error("Error saving entry: ", error);
-        res.status(500).json({error:' Failed to save entry'});
-    }
-});
-
-
-app.get('/leaderboard/show', async (req, res) => {
-    try{
-        const entries = await leaderboardModel.find();
-        res.json(entries)
-    } 
-    catch(err){
-        console.error("Error fetching data", error);
-        res.status(500).json({error: "Failed to fetch data"});
-    }
-
-})
-
-
-app.post("/user/add", (req, res) => {
-    const {name, email, password, gender, dob} = req.body;
-    userModel.create({name, email, password, gender, dob})
-    .then(user => res.status(201).json({message:'New user created successfully', user}))
-    .catch(err => res.status(500).json({error: err.message}));
-})
-
-app.post("/user/login", (req, res) => {
-    const {useremail, password} = req.body;
-    console.log(useremail, password)
-    userModel.findOne({
-        email : useremail
-    }). then(user => {
-        if (user) {
-            console.log("found the user !")
-            if(user.password === password){
-                res.json({message: "login successful", user : user})
-            }
-            else{
-                res.json("password is incorrect")
-            }
-        }
-        else{
-            console.log("can't find the user !")
-            res.json("No record existed");
-        }
-    }) .catch(err => res.status(500).json({error: err.message}) )
-})
+app.use('/user', userRoutes);
+app.use('/leaderboard', leaderboardRoutes);
 
 
 app.listen(PORT, () => {
