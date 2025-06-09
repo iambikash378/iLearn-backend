@@ -18,7 +18,8 @@ mongoose.connect(
 
 const app = express();
 app.use(cors());
-app.use(express.json())
+app.use(express.json());
+
 
 const Schema = mongoose.Schema;
 
@@ -29,8 +30,18 @@ const newSchema = new Schema(
     }
 );
 
-const leaderboardModel = mongoose.model('leaderboard', newSchema)
+const userSchema = new Schema(
+    {
+        name: String,
+        email: String,
+        password: String,
+        gender : String,
+        dob : Date
+    }
+);
 
+const leaderboardModel = mongoose.model('leaderboard', newSchema);
+const userModel = mongoose.model('userinfo', userSchema);
 
 app.post('/leaderboard/add', async (req, res) =>{
     const {name, score} = req.body;
@@ -57,6 +68,36 @@ app.get('/leaderboard/show', async (req, res) => {
         res.status(500).json({error: "Failed to fetch data"});
     }
 
+})
+
+
+app.post("/user/add", (req, res) => {
+    const {name, email, password, gender, dob} = req.body;
+    userModel.create({name, email, password, gender, dob})
+    .then(user => res.status(201).json({message:'New user created successfully', user}))
+    .catch(err => res.status(500).json({error: err.message}));
+})
+
+app.post("/user/login", (req, res) => {
+    const {useremail, password} = req.body;
+    console.log(useremail, password)
+    userModel.findOne({
+        email : useremail
+    }). then(user => {
+        if (user) {
+            console.log("found the user !")
+            if(user.password === password){
+                res.json({message: "login successful", user : user})
+            }
+            else{
+                res.json("password is incorrect")
+            }
+        }
+        else{
+            console.log("can't find the user !")
+            res.json("No record existed");
+        }
+    }) .catch(err => res.status(500).json({error: err.message}) )
 })
 
 
