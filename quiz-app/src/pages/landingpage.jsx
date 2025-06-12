@@ -16,13 +16,14 @@ function LandingPage(){
 
     const location = useLocation();
 
-    const [hasLoggedIn, setHasLoggedIn] = useState(location.state.hasLoggedIn);
+    const [hasLoggedIn, setHasLoggedIn] = useState(location.state?.hasLoggedIn || false);
 
-    const [nameOfUser, setNameOfUser] = useState(location.state.nameOfUser);
+    const [nameOfUser, setNameOfUser] = useState(location.state?.nameOfUser || "");
 
     console.log(hasLoggedIn, nameOfUser)
 
     const [selectedCategory, setSelectedCategory] = useState(null);
+
     function handleChoices(choice){
         setSelectedCategory(choice);
     }

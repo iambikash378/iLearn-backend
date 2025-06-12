@@ -1,5 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import Button from '@mui/material/Button';
+
 
 function UserLogin(){
 
@@ -9,10 +11,9 @@ function UserLogin(){
         navigate('/login');
     }
 
-
     return (
         <div>
-            <button onClick = {handleLogin}> Login </button>
+            <Button variant = "outlined" onClick = {handleLogin}> Login </Button>
         </div>
     );
 }

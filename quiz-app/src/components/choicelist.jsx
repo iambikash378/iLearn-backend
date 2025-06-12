@@ -1,5 +1,7 @@
 import React from 'react';
 
+import Button from '@mui/material/Button';
+
 import Choices from '../data/choices';
 
 function ChoiceList({handleChoices}){
@@ -7,8 +9,8 @@ function ChoiceList({handleChoices}){
         <div>
             {Choices.map(
                 (choice, index) => 
-                <button 
-                onClick ={() => handleChoices(choice)} >{choice}</button> 
+                <Button  variant = "contained"
+                onClick ={() => handleChoices(choice)}>{choice}</Button> 
             )
             }
         </div>   

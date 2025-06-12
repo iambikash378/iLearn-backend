@@ -1,6 +1,8 @@
 import React, {useState} from 'react';
 import axios from 'axios';
 import {useNavigate } from 'react-router-dom';
+import Button from '@mui/material/Button';
+
 
 function LoginPage() {
 
@@ -44,7 +46,7 @@ function LoginPage() {
                 value = {password}
                 onChange ={(e)=>setPassword(e.target.value)}/> <br/>
                 <br/>
-                <button type = "submit">Login</button>
+                <Button variant = "contained" type = "submit">Login</Button>
             </form>
         </div>
     )

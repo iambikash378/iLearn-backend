@@ -1,5 +1,7 @@
 import React, {useState} from 'react';
 import axios from 'axios';
+import Button from '@mui/material/Button';
+
 
 
 function SignUpPage() {
@@ -96,7 +98,7 @@ function SignUpPage() {
                 onChange = {(e) => setDob(e.target.value) }/> <br/>
                 <br/>
 
-                <button type = "submit">Register</button>
+                <Button variant = "contained" type = "submit">Register</Button>
             </form>
         </div>
     )

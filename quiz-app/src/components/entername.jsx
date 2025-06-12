@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import Button from '@mui/material/Button';
+
 
 function EnterName({score, setHasEnteredLeaderboard}){
 
@@ -32,7 +34,7 @@ function EnterName({score, setHasEnteredLeaderboard}){
                 onChange = {(e) => setName(e.target.value)}
                 required
             />
-            <button type = "submit"> Submit </button>
+            <Button variant ="contained" type = "submit"> Submit </Button>
         </form>
 
         </div>

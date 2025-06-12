@@ -1,6 +1,8 @@
 import React, {useState} from 'react'; 
 import EnterName from '../components/entername';
 import LeaderBoardPage from './leaderboard';
+import Button from '@mui/material/Button';
+
 
 
 function FinishedPage({correct, seconds, Questions, category}){
@@ -22,7 +24,7 @@ function FinishedPage({correct, seconds, Questions, category}){
                               ):(
                                 <div> </div>
                               )}
-                                <button onClick = {()=> setClickedLeaderBoard(true)} >Leaderboard</button>
+                                <Button variant = 'outlined' onClick = {()=> setClickedLeaderBoard(true)} >Leaderboard</Button>
                             </>
             ):
             (

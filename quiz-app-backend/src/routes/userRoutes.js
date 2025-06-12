@@ -18,7 +18,8 @@ router.post("/login", (req, res) => {
     }). then(user => {
         if (user) {
             console.log("found the user !")
-            if(user.password === password){
+            const isMatch = brcypt.compare(password, user.password)
+            if(isMatch){
                 res.json({message: "login successful", user : user})
             }
             else{
