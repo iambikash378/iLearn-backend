@@ -16,21 +16,26 @@ router.post("/login", (req, res) => {
     userModel.findOne({
         email : useremail
     }). then(user => {
-        if (user) {
-            console.log("found the user !")
-            const isMatch = brcypt.compare(password, user.password)
-            if(isMatch){
-                res.json({message: "login successful", user : user})
-            }
-            else{
-                res.json("password is incorrect")
-            }
+        if (!user) {
+            console.log("Couldn't find the user !")
+            res.json("No record exists")
+            return Promise.reject("User not found !")
         }
-        else{
-            console.log("can't find the user !")
-            res.json("No record existed");
-        }
-    }) .catch(err => res.status(500).json({error: err.message}) )
+
+            console.log("Found the user")
+            bcrypt.compare(password, user.password)
+            .then(isMatch => {
+                if(isMatch){
+                    console.log("Matched Password too")
+                    res.json({message: "login successful", user : user})
+                }
+                else{
+                    console.log("Password didn't match")
+                    res.json("password is incorrect")
+                }
+            })
+            .catch(err => res.status(500).json({error: err.message}) )
+        })
 })
 
 export default router;
