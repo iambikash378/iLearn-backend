@@ -29,6 +29,8 @@ app.use('/user', userRoutes);
 app.use('/leaderboard', leaderboardRoutes);
 
 
+
+
 app.listen(PORT, () => {
     console.log('Server listening on http://localhost:%s', PORT);
 } )
