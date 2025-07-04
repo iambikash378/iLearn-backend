@@ -1,6 +1,6 @@
 # quizapp-backend
 ## Tools Used:
-NodeJS
-ExpressJS
-MongoDB
-PostgreSQL
+- NodeJS
+- ExpressJS
+- MongoDB
+- PostgreSQL
