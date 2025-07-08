@@ -6,16 +6,16 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
-const router = express.Router();
+const user = express.Router();
 
-router.post("/add", (req, res) => {
+user.post("/add", (req, res) => {
     const {name, email, password, gender, dob} = req.body;
     userModel.create({name, email, password, gender, dob})
     .then(user => res.status(201).json({message:'New user created successfully', user}))
     .catch(err => res.status(500).json({error: err.message}));
 });
 
-router.post("/login", async (req, res) => {
+user.post("/login", async (req, res) => {
     const {useremail, password} = req.body;
     console.log(useremail, password)
     
@@ -53,4 +53,4 @@ router.post("/login", async (req, res) => {
     
 })
 
-export default router;
+export default user;

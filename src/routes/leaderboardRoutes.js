@@ -1,10 +1,9 @@
 import express from "express";
-import {leaderboardModel} from '../models/leaderboard.js';
-import authenticateToken from '../middleware/authmiddleware.js';
+import leaderboardModel from '../models/leaderboard.js';
 
 const router = express.Router();
 
-router.get('/show', authenticateToken, async (req, res) => {
+router.get('/show', async (req, res) => {
     try{
         const entries = await leaderboardModel.find();
         res.json(entries)

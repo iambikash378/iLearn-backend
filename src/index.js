@@ -2,13 +2,15 @@ import express from 'express';
 import cors from 'cors';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
+import userRoutes from './routes/userRoutes.js';
+import leaderboardRoutes from './routes/leaderboardRoutes.js';
+import authenticate from './middleware/authmiddleware.js';
+import coursesRoutes from './routes/courseRoutes.js';
+import filterRoutes from './routes/filterRoutes.js';
 
 dotenv.config();
 
-import userRoutes from './routes/userRoutes.js';
-import leaderboardRoutes from './routes/leaderboardRoutes.js';
-
-const PORT = process.env.PORT  || 3000;
+const PORT = process.env.PORT  || 8000;
 const MONGO_URI = process.env.MONGO_URI;
 
 mongoose.connect(
@@ -26,9 +28,9 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 app.use('/user', userRoutes);
-app.use('/leaderboard', leaderboardRoutes);
-
-
+app.use('/leaderboard', authenticate, leaderboardRoutes);
+app.use('/courses', coursesRoutes);
+app.use('/filters',filterRoutes)
 
 
 app.listen(PORT, () => {
