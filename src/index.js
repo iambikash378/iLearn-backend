@@ -7,6 +7,7 @@ import leaderboardRoutes from './routes/leaderboardRoutes.js';
 import authenticate from './middleware/authmiddleware.js';
 import coursesRoutes from './routes/courseRoutes.js';
 import filterRoutes from './routes/filterRoutes.js';
+import testRoutes from './routes/testRoutes.js';
 
 dotenv.config();
 
@@ -31,6 +32,7 @@ app.use('/user', userRoutes);
 app.use('/leaderboard', authenticate, leaderboardRoutes);
 app.use('/courses', coursesRoutes);
 app.use('/filters',filterRoutes)
+app.use('/test', testRoutes)
 
 
 app.listen(PORT, () => {
