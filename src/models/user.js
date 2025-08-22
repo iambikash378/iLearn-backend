@@ -7,7 +7,20 @@ const userSchema = new mongoose.Schema(
         email: String,
         password: String,
         gender : String,
-        dob : Date
+        dob : Date,
+
+        courses: [
+            {
+                type: mongoose.Schema.Types.ObjectId,
+                required:true,
+                ref:'course'
+            }
+        ],
+
+        isVerified:{
+            type:Boolean,
+            required:true
+        }
     }
 );
 

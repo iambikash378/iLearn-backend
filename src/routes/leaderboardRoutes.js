@@ -1,5 +1,5 @@
 import express from "express";
-import {leaderboardModel} from '../models/leaderboard.js';
+import leaderboardModel from '../models/leaderboard.js';
 
 const router = express.Router();
 
@@ -14,7 +14,7 @@ router.get('/show', async (req, res) => {
     }
 })
 
-router.post('/leaderboard/add', async (req, res) =>{
+router.post('/add', async (req, res) =>{
     const {name, score} = req.body;
     console.log("Received name : %s | Received score : %d", name, score);
     try{
@@ -30,5 +30,3 @@ router.post('/leaderboard/add', async (req, res) =>{
 
 
 export default router;
-
-
