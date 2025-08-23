@@ -22,6 +22,7 @@ export const ddb = DynamoDBDocumentClient.from(client);
 dotenv.config();
 
 const PORT = process.env.PORT  || 8000;
+const MONGO_URI = process.env.MONGO_URI || 5000;
 
 mongoose.connect(
     MONGO_URI,

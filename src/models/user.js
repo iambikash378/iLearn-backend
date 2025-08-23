@@ -17,8 +17,5 @@ const userSchema = new dynamoose.Schema(
     }
 );
 
-userSchema.pre("save", async function(){
-    this.password = await bcrypt.hash(this.password, 12);
-});
 
-export const userModel = mongoose.model('User', userSchema);
+export const userModel = dynamoose.model('User', userSchema);
