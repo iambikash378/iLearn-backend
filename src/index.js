@@ -9,10 +9,19 @@ import coursesRoutes from './routes/courseRoutes.js';
 import filterRoutes from './routes/filterRoutes.js';
 import testRoutes from './routes/testRoutes.js';
 
+import { DynamoDBClient } from '@aws-sdk/client-dynamodb';
+import {DynamoDBDocumentClient} from '@aws-sdk/lib-dynamodb';
+
+
+const client = new DynamoDBClient({
+    region: process.env.AWS_REGION
+});
+
+export const ddb = DynamoDBDocumentClient.from(client);
+
 dotenv.config();
 
 const PORT = process.env.PORT  || 8000;
-const MONGO_URI = process.env.MONGO_URI;
 
 mongoose.connect(
     MONGO_URI,

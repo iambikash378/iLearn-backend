@@ -1,26 +1,19 @@
-import mongoose from 'mongoose';
+import dynamoose from 'dynamoose';
 import bcrypt from 'bcrypt';
 
-const userSchema = new mongoose.Schema(
+const userSchema = new dynamoose.Schema(
     {
-        name: String,
-        email: String,
-        password: String,
-        gender : String,
-        dob : Date,
+        "email": String,
+        "username": String,
+        "password": String,
+        "phone": String,
 
-        courses: [
-            {
-                type: mongoose.Schema.Types.ObjectId,
-                required:true,
-                ref:'course'
-            }
-        ],
+        "isVerified":{
+            "type":Boolean,
+            "required":true
+        },
 
-        isVerified:{
-            type:Boolean,
-            required:true
-        }
+        
     }
 );
 
@@ -28,4 +21,4 @@ userSchema.pre("save", async function(){
     this.password = await bcrypt.hash(this.password, 12);
 });
 
-export const userModel = mongoose.model('userinfo', userSchema);
+export const userModel = mongoose.model('User', userSchema);
