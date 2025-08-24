@@ -27,7 +27,7 @@ jobs:
         uses: appleboy/ssh-action@v0.1.6
         with:
           host: ${{ secrets.EC2_HOST }}
-          username: ec2-host
+          username: ec2-user
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
             cd /var/www/iLearn-backend
