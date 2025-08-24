@@ -4,8 +4,7 @@ import brcypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
 import { marshall } from '@aws-sdk/util-dynamodb';
-
-import ddb from 'dynamoose/dist/aws/ddb/index.js';
+import { ddb } from '../index.js';
 import { PutItemCommand } from '@aws-sdk/client-dynamodb';
 
 dotenv.config();
@@ -13,16 +12,17 @@ dotenv.config();
 const user = express.Router();
 
 user.post("/add", async (req, res) => {
-    const {username, email, password} = req.body;
+    const {userId, username, email, password} = req.body;
 
     try{
         const hashedPassword = await brcypt.hash(password, 12)
         const addUser = new PutItemCommand({
             TableName: "users",
             Item:marshall({
+                userId: userId,
                 username: username,
                 email: email,
-                password: password,
+                password: hashedPassword,
             }),
         })
 
