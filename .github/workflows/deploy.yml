@@ -23,8 +23,8 @@ jobs:
         
       - name: Debug secrets
         run: |
-              echo "HOST=${{ secrets.HOST }}"
-              echo "USERNAME=${{ secrets.USERNAME }}"
+              echo "HOST=${{ secrets.EC2_HOST }}"
+              echo "KEY=${{ secrets.EC2_SSH_KEY }}"
 
 
       #- name: Run tests
