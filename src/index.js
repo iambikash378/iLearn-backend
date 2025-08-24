@@ -14,7 +14,7 @@ import {DynamoDBDocumentClient} from '@aws-sdk/lib-dynamodb';
 
 
 const client = new DynamoDBClient({
-    region: process.env.AWS_REGION
+    region: 'us-east-1'
 });
 
 export const ddb = DynamoDBDocumentClient.from(client);
