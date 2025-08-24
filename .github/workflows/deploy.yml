@@ -20,6 +20,12 @@ jobs:
 
       - name: Install dependencies
         run: npm install
+        
+      - name: Debug secrets
+        run: |
+              echo "HOST=${{ secrets.HOST }}"
+              echo "USERNAME=${{ secrets.USERNAME }}"
+
 
       #- name: Run tests
       # run: npm test
