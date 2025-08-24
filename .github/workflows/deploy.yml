@@ -7,6 +7,7 @@ on:
 jobs:
   deploy-backend:
     runs-on: ubuntu-latest
+    environment: deployment-to-ec2
 
     steps:
       - name: Checkout code
